@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face ID Access Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container" id="login-screen">
+        <div class="glass-panel">
+            <header>
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 3H5C3.89543 3 3 3.89543 3 5V7" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M17 3H19C20.1046 3 21 3.89543 21 5V7" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M21 17V19C21 20.1046 20.1046 21 19 21H17" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7 21H5C3.89543 21 3 20.1046 3 19V17" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle cx="12" cy="16" r="1" fill="currentColor" />
+                    </svg>
+                </div>
+                <h1>System Access</h1>
+                <p>Identity Verification Required</p>
+            </header>
+
+            <div class="camera-wrapper">
+                <video id="webcam" autoplay playsinline muted></video>
+                <canvas id="overlay"></canvas>
+                <div class="scan-line"></div>
+                <div class="corner-guide top-left"></div>
+                <div class="corner-guide top-right"></div>
+                <div class="corner-guide bottom-left"></div>
+                <div class="corner-guide bottom-right"></div>
+                <div id="status-message" class="status-text">Waiting for camera...</div>
+            </div>
+
+            <div class="controls">
+                <button id="scan-btn" class="primary-btn">
+                    <span class="btn-text">Initiate Scan</span>
+                    <div class="btn-glow"></div>
+                </button>
+                <button id="register-mode-btn" class="text-btn">Register New Member</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="app-container hidden" id="register-screen">
+        <div class="glass-panel">
+            <header>
+                <h1>New Member</h1>
+                <p>Register face ID for access</p>
+            </header>
+
+            <div class="camera-wrapper">
+                <video id="reg-webcam" autoplay playsinline muted></video>
+                <div class="scan-line"></div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="reg-name" placeholder="Enter Full Name" autocomplete="off">
+            </div>
+
+            <div class="controls row">
+                <button id="cancel-reg-btn" class="secondary-btn">Cancel</button>
+                <button id="save-reg-btn" class="primary-btn small">
+                    Save ID
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container hidden" id="dashboard-screen">
+        <div class="glass-panel wide">
+            <header class="dashboard-header">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" alt="User">
+                    </div>
+                    <div>
+                        <h2>Welcome back</h2>
+                        <p class="status-online">System Online</p>
+                    </div>
+                </div>
+                <button id="logout-btn" class="secondary-btn">Logout</button>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="card">
+                    <h3>Security Status</h3>
+                    <div class="stat">SECURE</div>
+                </div>
+                <div class="card">
+                    <h3>Last Login</h3>
+                    <div class="stat" id="last-login-time">--:--</div>
+                </div>
+                <div class="card">
+                    <h3>Access Level</h3>
+                    <div class="stat">Admin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
